@@ -6,5 +6,3 @@ library(shiny)
 
 # Easiest way is to use runGitHub
 runGitHub(repo = 'BayesianOptimalDesign', username = 'stat-li', ref = 'main')
-
-```R
