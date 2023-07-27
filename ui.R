@@ -3,6 +3,9 @@ library(shinycssloaders)
 ui <- fluidPage(
   
   titlePanel("Bayesian optimal group sequential design with time to event endpoint"),
+  "More details and instructions to use this app can be found ",
+  tags$a(href="https://github.com/Stat-Li/BayesianOptimalDesign", 
+         "here."),
   fluidRow(
     column(3,
            wellPanel(
