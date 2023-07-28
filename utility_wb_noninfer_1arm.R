@@ -51,9 +51,9 @@ stage_i = function(mi, S0, t, dataSurv_sort1_s1, dataSurv_s1, dataSurv_sort_s1,
 }
 
 optim_tune = function(delta_0, p_shape=1 , m, n, ti=c(0.5, 1), pram_gamma_a, 
-                      pram_gamma_b, ta = 4, tf = 2, S0 = 0.53, t0 = 3, 
+                      pram_gamma_b, ta = 4, tf = 2, S0, t0, 
                       nsim = 10000, delta_noninferior){
-    p_scale0 = (-log(0.53))^(1/p_shape)/3
+    p_scale0 = (-log(S0))^(1/p_shape)/t0
     p_scale1 = p_scale0*delta_0^(1/p_shape)
     m_interim = ceiling(m*ti)
     results_post = matrix(NA, nrow = nsim, ncol = length(ti))
@@ -147,16 +147,13 @@ grid_func = function(param_tune, results, ti = c(0.5, 1)){
     return(p_type1)
 }
 grid_func_fut = function(param_tune, results, ti = c(0.5, 1)){
-    # x=p_lambda; y=p_gamma
+
     p_lambda = param_tune[1]; p_gamma = param_tune[2]
     probs = results$prob; size = results$size; dur = results$dur
     
     # -- futility stop -----#
     cutoffs_fut = cut_futility(ti, p_lambda = p_lambda, p_gamma = p_gamma)
     prob_check_fut = t(t(probs) < cutoffs_fut)
-    # prob_check2 = prob_check_fut
-    # prob_check2[, dim(prob_check2)[2]] = 1
-    # stop_i_fut = pmin_stop(prob_check2)
 
     p_type1 = mean(rowSums(prob_check_fut)==0)
     return(p_type1)
