@@ -20,7 +20,7 @@ server <- function(input, output, session) {
     results_tune = NULL
     results_stop = NULL
     if(input$design_arm=="Single-arm"){
-      source("utility_wb_noninfer.R")
+      source("utility_wb_noninfer_1arm.R")
       pram_gamma_a = as.numeric(unlist(strsplit(input$gamma_a," ")))
       m_target = ceiling((qnorm(1-type1)+qnorm(1-type2))^2/(log(delta_1/delta0))^2)
       ff = function(t){
@@ -180,7 +180,7 @@ server <- function(input, output, session) {
       }
     }
     if(input$design_arm=="Two-arm RCT"){
-      source("utility_wb_rct_noninfer.R")
+      source("utility_wb_noninfer_rct.R")
       eta = -log(delta0)
       theta0 = -0.5*log(delta_1)
       sigma2_0 = as.numeric(unlist(strsplit(input$sigma2_0," ")))
