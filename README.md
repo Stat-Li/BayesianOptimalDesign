@@ -42,4 +42,4 @@ $$ \alpha_s(t)=2\Phi(Z_{\frac{1+\lambda}{2}}/\sqrt{t}) - 1. $$
 
 ## Simulation of failure time with Weibull
 
-This app will require user to specify the 3-year survival probability of the historical control (or reference control), e.g. $S_0(3) = 0.55$ and the shape parameter of Weibull. The survival function of $S_0(t)$ is given by $$S_0(t) = \exp(\rho t)^\kappa,$$ where $\kappa$ is the shape parameter of Weibull and $\rho$ is the scale parameter.
+This app will require user to specify the x-year survival probability of the historical control (or reference control), e.g. $S_0(3) = 0.55$ and the shape parameter of Weibull. The survival function of $S_0(t)$ is given by $$S_0(t) = \exp(\rho t)^\kappa,$$ where $\kappa$ is the shape parameter of Weibull and $\rho$ is the scale parameter.
