@@ -55,7 +55,8 @@ ui <- fluidPage(
                textInput("sigma2_0", label = ("Normal prior variance parameter"),
                          value = "0.5 0.2 0.1")
              ),
-
+             # textInput("gamma_a", label = ("Gamma prior shape parameter"),
+             #           value = "2 5 10"),
              helpText('Note: Multiple values allowed. Seperate each shape by space.', style = "font-size:10px"),
              numericInput("ta",
                           label = ("Accrual duration (years)"),
@@ -63,12 +64,17 @@ ui <- fluidPage(
              numericInput("tf",
                           label = ("Follow-up duration (years)"),
                           value = 2, min = 0, max = 10, step = 1),
-
+             # numericInput("surv_3year", 
+             #              label = ("3-year survival probability for control"), 
+             #              value = 0.53, min = 0, max = 1, step = 0.01),
              h5('x-year survival probability for control'),
              div(style="display: inline-block;vertical-align:top; width: 100px;",
                  numericInput("x_year", label = "Year", value = 3, min = 0, max = 10, step = 0.1)),
              div(style="display: inline-block;vertical-align:top; width: 100px;",
                  numericInput("surv_3year", label = ("Survival prob."), value = 0.53, min = 0, max = 1, step = 0.01)),
+             numericInput("search_gamma",
+                          label = withMathJax("Tuning parameter \\(\\gamma\\) upper bound"),
+                          value = 0.5, min = 0, max = 10, step = 0.1),
              numericInput("n_sims", 
                           label = ("Number of simulation trials"), 
                           value = 2000, min = 0, max = 100000, step = 100),
@@ -76,7 +82,18 @@ ui <- fluidPage(
            )
     ),
     column(9,
+           # wellPanel(
+           #   h4("Frequentist operating characteristics:"),
+           #   # dataTableOutput('out_table')
+           #   shinycssloaders::withSpinner(
+           #     dataTableOutput('out_table')
+           #   ),
+           #   span('PRN: probability of rejecting null. PET: probability of early stopping.
+           #        ES: expected sample size. EE expected number of events.')
+           # )
            mainPanel(
+             
+             # Output: Tabset w/ plot, summary, and table ----
              tabsetPanel(type = "tabs",
                          tabPanel("Operating characteristics", shinycssloaders::withSpinner(
                            dataTableOutput('out_table_ops')
