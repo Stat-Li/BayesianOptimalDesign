@@ -44,6 +44,7 @@ server <- function(input, output, session) {
         
         p.tune = expand.grid(x = p1, y = p2)
         if(input$design_stop == "Futility and superiority stopping"){
+          source("stopping_boundary.R")
           grid_search = apply(p.tune, 1, grid_func, results = results_h0, ti = timing)
           grid_search = round(grid_search, digits = 3)
           sum_0=p.tune[which(abs(grid_search-type1) < 0.01 & grid_search < type1), ]
